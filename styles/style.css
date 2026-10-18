@@ -1,0 +1,756 @@
+body {
+  background-color: #1C1826;
+}
+
+.whole {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  width: 90vw;
+  gap: 50px;
+  shape-rendering: geometricPrecision;
+}
+
+@media (max-width: 1150px) {
+  .whole {
+    display: flex;
+    gap: 0px;
+  }
+}
+.map_outer {
+  max-width: 650px;
+  min-width: 630px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+@media (max-width: 1024px) {
+  .map_outer {
+    width: 55vw;
+    height: 700px;
+    max-height: 90vh;
+    min-width: 500px;
+  }
+}
+.mainIsland {
+  fill: #D4C4A8;
+  stroke: #1C1826;
+}
+
+.offshoreIslands {
+  fill: #D4C4A8;
+  stroke: #D4C4A8;
+}
+
+.independent_out {
+  fill: #181826;
+  stroke: #6A6070;
+  stroke-width: 2px;
+  stroke-dasharray: 5 3;
+}
+
+.map_county_name {
+  font-size: 28px;
+  stroke: #C8C0D0;
+  font-weight: 100;
+  font-family: "Chiron GoRound TC", sans-serif;
+  letter-spacing: 2px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.liuqiuG .map_county_name {
+  font-size: 25px;
+}
+
+.map_title {
+  color: #C8C0D0;
+}
+
+.new_taipei {
+  fill: #5BC0EB;
+}
+
+#taiwan {
+  width: auto;
+  height: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+#liuqiuB {
+  fill: url(#liuqiuLG);
+  clip-path: polygon(11% 96%, 2% 18%, 95% 35%);
+}
+
+#range_pingtung {
+  fill: transparent;
+  clip-path: polygon(11% 93%, 17% 27%, 57% 13%, 78% 24%, 90% 36%, 98% 56%, 100% 76%);
+}
+
+#greenB {
+  fill: url(#greenLG);
+  clip-path: polygon(100% 48%, 30% 42%, 100% 100%);
+}
+
+#lanyuB {
+  fill: url(#lanyuLG);
+  clip-path: polygon(90% 69%, 19% 9%, 42% 88%);
+}
+
+#range_taitung {
+  fill: transparent;
+  clip-path: polygon(4% 69%, 3% 60%, 8% 49%, 27% 38%, 43% 26%, 56% 5%, 60% 2%, 98% 43%, 80% 86%, 47% 98%, 26% 100%);
+}
+
+#guishanB {
+  fill: url(#guishanLG);
+  clip-path: polygon(0 71%, 90% 77%, 64% 8%);
+}
+
+#range_yilan {
+  fill: transparent;
+  clip-path: polygon(52% 1%, 93% 20%, 79% 54%, 54% 82%, 4% 96%, 11% 26%, 32% 8%);
+}
+
+.lightBeam {
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.satellitesG:has(.mainIsland:hover, .dependentG:hover) .lightBeam {
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+.satellitesG:has(.mainIsland:hover, .dependentG:hover) .map_county_name {
+  stroke: #ece5f3;
+  transition: stroke 0.3s ease;
+}
+
+.mainIsland:hover, .satellitesG:hover path, .independentG:hover path {
+  fill: #5BC0EB;
+  stroke: #242030;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.satellitesG:hover .offshoreIslands, .independentG:hover .offshoreIslands {
+  transform-origin: center;
+  transform-box: fill-box;
+  filter: url(#osiGlow);
+  vector-effect: non-scaling-stroke;
+}
+
+.mainIsland:hover {
+  transform: translate(-5px, -5px);
+}
+.mainIsland:hover#hsinchu_city {
+  transform: translate(-5px, -3px);
+}
+
+.chiayiG:has(#chiayi_county:hover) #chiayi_city {
+  opacity: 0;
+  transition: opacity 0s ease;
+}
+
+.satellitesG:hover path#green_island {
+  transform: scale(1.4);
+}
+.satellitesG:hover path#lanyu {
+  transform: scale(1.2);
+}
+.satellitesG:hover path#liuqiu {
+  transform: scale(1.8);
+}
+.satellitesG:hover path#guishan_island {
+  transform: scale(2.4);
+}
+
+.independentG:hover path.PPCworduge_OSI {
+  transform: scale(1.1);
+}
+.independentG:hover path.PHnormal_OSI {
+  transform: scale(1.2);
+}
+.independentG:hover path.PHsmall_OSI {
+  transform: scale(2);
+}
+.independentG:hover path.PHtiny_OSI {
+  transform: scale(2.8);
+}
+.independentG:hover path.KMhuge_OSI {
+  transform: scale(1.1);
+}
+.independentG:hover path.KMnormal_OSI {
+  transform: scale(1.2);
+}
+.independentG:hover path.KMtiny_OSI {
+  transform: scale(3.6);
+}
+.independentG:hover path.LJnormal_OSI {
+  transform: scale(1.3);
+}
+.independentG:hover path.LJsmall_OSI {
+  transform: scale(1.4);
+}
+.independentG:hover path.LJtiny_OSI {
+  transform: scale(2.6);
+}
+.independentG:hover .independent_out {
+  fill: rgba(91, 192, 235, 0.1);
+  stroke: #5BC0EB;
+  stroke-dasharray: none;
+  filter: drop-shadow(0px 0px 6px #5bc0eb);
+  transition: all 0.3s ease;
+}
+.independentG:hover .map_county_name {
+  stroke: #ece5f3;
+  filter: drop-shadow(0px 0px 6px rgba(236, 229, 243, 0.5));
+  transition: all 0.3s ease;
+}
+
+svg:has(.team_taitung:hover) #green_beam_mid {
+  stop-color: "#8fa1b5" !important;
+  stop-opacity: 0.65 !important;
+}
+
+svg:has(.team_taitung:hover) #lanyu_beam_mid1 {
+  stop-color: "#8fa1b5" !important;
+  stop-opacity: 0.6 !important;
+}
+
+svg:has(.team_taitung:hover) #lanyu_beam_st {
+  stop-color: "#d2dff0" !important;
+  stop-opacity: 0.5 !important;
+}
+
+svg:has(.team_pingtung:hover) #liuqiu_beam_mid {
+  stop-color: "#8fa1b5" !important;
+  stop-opacity: 0.5 !important;
+}
+
+svg:has(.team_yilan:hover) #guishan_beam_mid1 {
+  stop-color: "#8fa1b5" !important;
+  stop-opacity: 0.6 !important;
+}
+
+.info_outer {
+  min-width: 430px;
+  height: auto;
+  border-radius: 12px;
+  background-color: #242030;
+  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.info_inner {
+  width: 410px;
+  display: flex;
+  flex-direction: column;
+}
+
+.info_word {
+  font-family: "Inter", "Chiron GoRound TC", sans-serif;
+  background: none;
+  color: #F0ECE6;
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+.info_word.subhead, .info_word#info_subtitle {
+  padding: 0 5px;
+}
+.info_area .info_word:not(.subhead) {
+  letter-spacing: 0;
+}
+
+.oneRow {
+  display: flex;
+  align-items: center;
+}
+
+.county_out {
+  padding: 5px 0;
+}
+
+.headlineICO_out {
+  margin: 5px 5px 3px 5px;
+}
+
+#headlineICO_MB {
+  width: 32px;
+  height: 32px;
+}
+
+#info_county {
+  font-size: 25px;
+  margin: 3px 0px;
+  color: #99d0e6;
+}
+
+.warn_out {
+  border: 2px solid rgb(209, 109, 27);
+  background-color: rgba(209, 109, 27, 0.26);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  padding: 2px 0 5px 6px;
+  margin-bottom: 15px;
+}
+
+.warnW {
+  word-break: break-word;
+  margin: 2px 0;
+  font-size: 16px;
+}
+
+#warn_title {
+  font-weight: 700;
+  font-size: 21px;
+  color: #b9d698;
+}
+
+.warnICO_out {
+  margin: 3px 5px 2px 0px;
+}
+
+#warnICO_MB {
+  width: 22px;
+  height: 22px;
+}
+
+.subtitle_out {
+  height: 30px;
+}
+.subtitle_out #info_subtitle {
+  font-size: 18px;
+  margin: 0;
+}
+
+.info_area {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  margin-top: 0;
+  gap: 5px;
+}
+
+.weather_out {
+  grid-column: 1/-1;
+  grid-row: span 1;
+}
+
+.FLtemp_out {
+  grid-column: 1/4;
+  grid-row: span 1;
+}
+
+.UV_out {
+  grid-column: 4/-1;
+  grid-row: span 1;
+}
+
+.RNrainfall_out {
+  grid-column: 1/4;
+  grid-row: span 1;
+}
+
+.humidity_out {
+  grid-column: 4/-1;
+  grid-row: span 1;
+}
+
+.wind_out {
+  grid-column: 1/5;
+  grid-row: span 2;
+}
+
+.suntime_out {
+  grid-column: 5/-1;
+  grid-row: span 2;
+}
+
+.trend_out {
+  grid-column: 1/-1;
+  grid-row: span 4;
+}
+
+.advice_out {
+  grid-column: 1/-1;
+  grid-row: span 1;
+}
+
+#weatherICO_MB {
+  margin: 5px 8px 2px 5px;
+  width: 35px;
+  height: 35px;
+}
+
+.weatherW {
+  font-size: 25px;
+  margin: 15px 0;
+}
+
+.outBase {
+  background-color: rgba(95, 85, 148, 0.1176470588);
+  border-radius: 10px;
+  padding-left: 5px;
+}
+
+.quarter p {
+  margin: 0;
+}
+.quarter .DTs {
+  margin: 5px 0px;
+}
+
+.subhead {
+  color: #F0ECE6;
+}
+
+.initial_opacity {
+  opacity: 0.5;
+}
+
+.initial_appear {
+  display: "";
+}
+
+.initial_disappear {
+  display: none;
+}
+
+.wind_out {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto 1fr 1fr;
+}
+
+.windHeadline {
+  grid-column: 1/4;
+  grid-row: 1/2;
+  margin: 8px 0 0 0px;
+}
+
+.windLeft {
+  grid-column: 1/4;
+  grid-row: 2/-1;
+  margin-left: 3px;
+}
+
+.windRight {
+  grid-column: 4/-1;
+  grid-row: 1/-1;
+  margin-right: 10px;
+}
+
+.windLeft {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 25px;
+}
+.windLeft p {
+  margin: 0;
+}
+
+#windSpeedDT {
+  font-size: 36px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.leftRight {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.windLine {
+  width: 1px;
+  height: 66%;
+  transform: scaleX(0.6);
+  transform-origin: left;
+  background: rgba(236, 229, 243, 0.3);
+}
+
+.wind_opacity {
+  opacity: 0.6;
+}
+
+.LRword {
+  font-size: 17px;
+}
+
+.LRword2 {
+  font-size: 15px;
+}
+
+.windSpeedUNIT, .windConnect, .windGustUNIT {
+  font-size: 12px;
+}
+
+.windRight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 70px;
+  margin: 0 6px 0 0;
+}
+
+.compass_out {
+  width: 70px;
+  height: 70px;
+  position: relative;
+}
+
+.windICOS {
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+#windDirectionDT {
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.pointerICO {
+  transform: translate(-50%, -50%) rotate(225deg);
+}
+
+.suntime_out {
+  position: relative;
+}
+
+.sunHeadline {
+  margin: 8px 0 0 0px;
+  text-align: center;
+}
+
+.suntime_in {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 58%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.stICOS {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+#sunriseICO {
+  color: #f5bd23;
+}
+
+#sunsetICO {
+  color: #657eeb;
+}
+
+.sunLine {
+  height: 1px;
+  width: 120px;
+  transform: scaleY(1.4);
+  transform-origin: top;
+  background: linear-gradient(to right, #f5bd23, #657eeb);
+  margin-top: 4px;
+  margin-bottom: 6px;
+}
+
+.sunLable {
+  color: rgba(240, 236, 230, 0.6);
+  font-size: 12px;
+  text-align: end;
+  text-wrap: nowrap;
+}
+
+.bothends {
+  display: flex;
+  justify-content: space-between;
+}
+.bothends.trend_top {
+  align-items: center;
+}
+
+.sunrise_out {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+
+.sunset_out {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-self: end;
+  gap: 1px;
+}
+
+.trend_top {
+  height: 36px;
+  margin-top: 10px;
+  margin-right: 15px;
+}
+
+.toggleTR {
+  background-color: rgba(103, 91, 163, 0.1176470588);
+  width: 168px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+}
+
+.trendBTS {
+  width: 82px;
+  height: 30px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.toggleON {
+  background-color: #3691b8;
+  color: #F0ECE6;
+}
+
+.toggleOFF {
+  background: none;
+  color: rgba(240, 236, 230, 0.36);
+}
+
+.toggleTR:hover {
+  cursor: not-allowed;
+}
+.toggleTR:hover .trendBTS {
+  cursor: not-allowed;
+}
+
+.chart_out {
+  height: 180px;
+}
+
+.chart_in {
+  height: auto;
+}
+.chart_in text {
+  font-family: "Inter", "Chiron GoRound TC", sans-serif;
+}
+.chart_in text.datalabelS {
+  font-size: 12px;
+}
+.chart_in text.scaleX, .chart_in text.scaleY {
+  font-size: 10px;
+}
+
+.gridlines {
+  stroke: #7784a3;
+}
+
+.scaleX, .scaleY {
+  fill: #7784a3;
+}
+
+.temp_trendline {
+  stroke: #a8d3b9;
+}
+
+.temp_datapoint {
+  fill: #a8d3b9;
+}
+
+.temp_datalabel {
+  fill: #a8d3b9;
+}
+
+.clickRemind {
+  font-size: 15px;
+  color: rgba(240, 236, 230, 0.6);
+  text-align: center;
+  padding-top: 70px;
+}
+
+.updateRemind {
+  font-size: 13px;
+  color: rgba(240, 236, 230, 0.36);
+  text-align: end;
+  margin: 5px 12px 5px 0;
+}
+
+#adviceICO_MB {
+  margin: 5px 3px 2px 3px;
+  width: 30px;
+  height: 30px;
+}
+
+#advice_content {
+  font-size: 17px;
+  color: #F0ECE6;
+  margin: 0 0 2px 0;
+}
+
+.previewCard_out {
+  width: auto;
+  height: 60px;
+  border-radius: 6px;
+  background-color: #352950;
+  border: 1px solid rgba(224, 216, 236, 0.3);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 3px;
+  pointer-events: none;
+}
+
+.previeWord {
+  color: #E0D8EC;
+  font-size: 13px;
+}
+.previeWord#PCcounty {
+  font-size: 16px;
+}
+.previeWord.PCconnect {
+  font-size: 6px;
+}
+
+.pcG {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3px;
+  margin: 2px 6px 2px 8px;
+}
+
+#PCweatherICO_MB {
+  width: 24px;
+  height: 24px;
+}/*# sourceMappingURL=style.css.map */
