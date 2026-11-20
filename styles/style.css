@@ -49,6 +49,9 @@ body {
   fill: #D4C4A8;
   stroke: #D4C4A8;
 }
+.map_countyArea.isWarning.isActiveOSI .offshoreIslands {
+  stroke: var(--warn-color);
+}
 
 .independent_out {
   fill: #181826;
@@ -149,6 +152,11 @@ body {
   vector-effect: non-scaling-stroke;
 }
 
+.satellitesG.isActive .offshoreIslands, .independentG.isActiveOSI .offshoreIslands {
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
 .mainIsland:hover {
   transform: translate(-5px, -5px);
 }
@@ -161,49 +169,50 @@ body {
   transition: opacity 0s ease;
 }
 
-.satellitesG:hover path#green_island {
+.satellitesG:hover path#green_island, .satellitesG.isActive path#green_island {
   transform: scale(1.4);
 }
-.satellitesG:hover path#lanyu {
+.satellitesG:hover path#lanyu, .satellitesG.isActive path#lanyu {
   transform: scale(1.2);
 }
-.satellitesG:hover path#liuqiu {
+.satellitesG:hover path#liuqiu, .satellitesG.isActive path#liuqiu {
   transform: scale(1.8);
 }
-.satellitesG:hover path#guishan_island {
+.satellitesG:hover path#guishan_island, .satellitesG.isActive path#guishan_island {
   transform: scale(2.4);
 }
 
-.independentG:hover path.PPCworduge_OSI {
+.independentG:hover path.PHhuge_OSI, .independentG.isActiveOSI path.PHhuge_OSI {
   transform: scale(1.1);
 }
-.independentG:hover path.PHnormal_OSI {
+.independentG:hover path.PHnormal_OSI, .independentG.isActiveOSI path.PHnormal_OSI {
   transform: scale(1.2);
 }
-.independentG:hover path.PHsmall_OSI {
+.independentG:hover path.PHsmall_OSI, .independentG.isActiveOSI path.PHsmall_OSI {
   transform: scale(2);
 }
-.independentG:hover path.PHtiny_OSI {
+.independentG:hover path.PHtiny_OSI, .independentG.isActiveOSI path.PHtiny_OSI {
   transform: scale(2.8);
 }
-.independentG:hover path.KMhuge_OSI {
+.independentG:hover path.KMhuge_OSI, .independentG.isActiveOSI path.KMhuge_OSI {
   transform: scale(1.1);
 }
-.independentG:hover path.KMnormal_OSI {
+.independentG:hover path.KMnormal_OSI, .independentG.isActiveOSI path.KMnormal_OSI {
   transform: scale(1.2);
 }
-.independentG:hover path.KMtiny_OSI {
+.independentG:hover path.KMtiny_OSI, .independentG.isActiveOSI path.KMtiny_OSI {
   transform: scale(3.6);
 }
-.independentG:hover path.LJnormal_OSI {
+.independentG:hover path.LJnormal_OSI, .independentG.isActiveOSI path.LJnormal_OSI {
   transform: scale(1.3);
 }
-.independentG:hover path.LJsmall_OSI {
+.independentG:hover path.LJsmall_OSI, .independentG.isActiveOSI path.LJsmall_OSI {
   transform: scale(1.4);
 }
-.independentG:hover path.LJtiny_OSI {
+.independentG:hover path.LJtiny_OSI, .independentG.isActiveOSI path.LJtiny_OSI {
   transform: scale(2.6);
 }
+
 .independentG:hover .independent_out {
   fill: rgba(91, 192, 235, 0.1);
   stroke: #5BC0EB;
@@ -243,7 +252,7 @@ svg:has(.team_yilan:hover) #guishan_beam_mid1 {
 }
 
 .info_outer {
-  min-width: 430px;
+  min-width: 450px;
   height: auto;
   border-radius: 12px;
   background-color: #242030;
@@ -254,7 +263,7 @@ svg:has(.team_yilan:hover) #guishan_beam_mid1 {
 }
 
 .info_inner {
-  width: 410px;
+  width: 430px;
   display: flex;
   flex-direction: column;
 }
@@ -286,7 +295,7 @@ svg:has(.team_yilan:hover) #guishan_beam_mid1 {
   margin: 5px 5px 3px 5px;
 }
 
-#headlineICO_MB {
+.headlineICO_in {
   width: 32px;
   height: 32px;
 }
@@ -294,38 +303,130 @@ svg:has(.team_yilan:hover) #guishan_beam_mid1 {
 #info_county {
   font-size: 25px;
   margin: 3px 0px;
-  color: #99d0e6;
+  color: #cfc0f0;
 }
 
-.warn_out {
-  border: 2px solid rgb(209, 109, 27);
-  background-color: rgba(209, 109, 27, 0.26);
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  padding: 2px 0 5px 6px;
-  margin-bottom: 15px;
+#updateTime {
+  color: rgba(240, 236, 230, 0.4);
+  font-size: 13px;
 }
 
-.warnW {
-  word-break: break-word;
-  margin: 2px 0;
-  font-size: 16px;
-}
-
-#warn_title {
-  font-weight: 700;
-  font-size: 21px;
-  color: #b9d698;
+.headlineW {
+  width: 88%;
 }
 
 .warnICO_out {
   margin: 3px 5px 2px 0px;
 }
 
-#warnICO_MB {
+.warnICO_in {
   width: 22px;
   height: 22px;
+}
+
+.warn {
+  border: 2px solid var(--warn-color);
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  padding: 2px 0 6px 7px;
+  margin-bottom: 15px;
+  flex-direction: column;
+}
+
+#warn_title {
+  margin: 2px 0;
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--warn-color);
+}
+
+.warnW {
+  font-size: 16px;
+  margin: 5px 0 0 0;
+  opacity: 0.8;
+  word-break: break-word;
+}
+
+@keyframes alertmMI_blink {
+  0%, 100% {
+    fill: var(--warn-color);
+  }
+  50% {
+    fill: #D4C4A8;
+  }
+}
+@keyframes alertOSI_blink {
+  0%, 100% {
+    fill: var(--warn-color);
+    stroke: var(--warn-color);
+  }
+  50% {
+    fill: #D4C4A8;
+    stroke: #D4C4A8;
+  }
+}
+@keyframes alertR_blink {
+  0% {
+    stroke: var(--warn-color);
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke: #6A6070;
+  }
+  100% {
+    stroke: var(--warn-color);
+    stroke-dashoffset: -32;
+  }
+}
+.map_countyArea.isAlert.singleG,
+.map_countyArea.isAlert.satellitesG .mainIsland {
+  animation: alertmMI_blink 3s ease-in-out infinite;
+}
+
+.map_countyArea.isAlert .offshoreIslands {
+  animation: alertOSI_blink 3s ease-in-out infinite;
+}
+
+.map_countyArea.isAlert.independentG rect {
+  animation: alertR_blink 3s ease-in-out infinite;
+}
+
+.map_countyArea.isWarning.independentG rect {
+  animation: none;
+  stroke: var(--warn-color);
+}
+
+path.map_countyArea.isWarning:not(.isAlert),
+.map_countyArea.isWarning:not(.isAlert) path {
+  animation: none;
+  fill: var(--warn-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  path.map_countyArea.isWarning, .map_countyArea.isWarning path {
+    animation: none;
+    fill: var(--warn-color);
+  }
+  path.map_countyArea.isAlert, .map_countyArea.isAlert path {
+    animation: none;
+    fill: "#ec788c";
+  }
+}
+.map_countyArea.isActive.singleG,
+.map_countyArea.isActive.satellitesG .mainIsland {
+  stroke: #4772e9;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+.map_countyArea.isActiveOSI rect,
+.map_countyArea.isWarning.isActiveOSI rect {
+  animation: none;
+  stroke: #5BC0EB;
+  stroke-width: 3px;
+  stroke-dasharray: none;
+  stroke-linejoin: round;
+  filter: drop-shadow(0px 0px 6px #5bc0eb);
 }
 
 .subtitle_out {
@@ -389,7 +490,7 @@ svg:has(.team_yilan:hover) #guishan_beam_mid1 {
   grid-row: span 1;
 }
 
-#weatherICO_MB {
+.weatherICO_in {
   margin: 5px 8px 2px 5px;
   width: 35px;
   height: 35px;
@@ -444,7 +545,7 @@ svg:has(.team_yilan:hover) #guishan_beam_mid1 {
 .windLeft {
   grid-column: 1/4;
   grid-row: 2/-1;
-  margin-left: 3px;
+  margin-left: 6px;
 }
 
 .windRight {
@@ -464,10 +565,19 @@ svg:has(.team_yilan:hover) #guishan_beam_mid1 {
   margin: 0;
 }
 
+.windSpeed_out {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+}
+
 #windSpeedDT {
   font-size: 36px;
   font-weight: 300;
   letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
 }
 
 .leftRight {
@@ -478,7 +588,7 @@ svg:has(.team_yilan:hover) #guishan_beam_mid1 {
 
 .windLine {
   width: 1px;
-  height: 66%;
+  height: 70%;
   transform: scaleX(0.6);
   transform-origin: left;
   background: rgba(236, 229, 243, 0.3);
@@ -488,16 +598,21 @@ svg:has(.team_yilan:hover) #guishan_beam_mid1 {
   opacity: 0.6;
 }
 
-.LRword {
-  font-size: 17px;
+.LRword1 {
+  font-size: 20px;
 }
 
 .LRword2 {
-  font-size: 15px;
+  font-size: 16px;
 }
 
-.windSpeedUNIT, .windConnect, .windGustUNIT {
+.windSpeedUNIT, .windGustUNIT {
   font-size: 12px;
+}
+
+.windConnect {
+  font-size: 8px;
+  margin: 0;
 }
 
 .windRight {
@@ -528,10 +643,6 @@ svg:has(.team_yilan:hover) #guishan_beam_mid1 {
 #windDirectionDT {
   font-size: 16px;
   white-space: nowrap;
-}
-
-.pointerICO {
-  transform: translate(-50%, -50%) rotate(225deg);
 }
 
 .suntime_out {
@@ -591,7 +702,7 @@ svg:has(.team_yilan:hover) #guishan_beam_mid1 {
   display: flex;
   justify-content: space-between;
 }
-.bothends.trend_top {
+.bothends.trend_top, .bothends.headlineW {
   align-items: center;
 }
 
@@ -610,9 +721,14 @@ svg:has(.team_yilan:hover) #guishan_beam_mid1 {
   gap: 1px;
 }
 
+.trend_out {
+  padding-bottom: 0;
+}
+
 .trend_top {
   height: 36px;
   margin-top: 10px;
+  margin-bottom: 0;
   margin-right: 15px;
 }
 
@@ -654,57 +770,35 @@ svg:has(.team_yilan:hover) #guishan_beam_mid1 {
 }
 
 .chart_out {
-  height: 180px;
+  height: 185px;
+  width: 98%;
+  position: relative;
 }
 
-.chart_in {
-  height: auto;
-}
-.chart_in text {
-  font-family: "Inter", "Chiron GoRound TC", sans-serif;
-}
-.chart_in text.datalabelS {
-  font-size: 12px;
-}
-.chart_in text.scaleX, .chart_in text.scaleY {
-  font-size: 10px;
-}
-
-.gridlines {
-  stroke: #7784a3;
-}
-
-.scaleX, .scaleY {
-  fill: #7784a3;
-}
-
-.temp_trendline {
-  stroke: #a8d3b9;
-}
-
-.temp_datapoint {
-  fill: #a8d3b9;
-}
-
-.temp_datalabel {
-  fill: #a8d3b9;
-}
-
-.clickRemind {
+#clickRemind {
   font-size: 15px;
   color: rgba(240, 236, 230, 0.6);
-  text-align: center;
-  padding-top: 70px;
+  background-color: #2A263B;
+  margin: 0;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 102%;
+  height: 100%;
+  border: none;
 }
 
-.updateRemind {
+#updateRemind {
   font-size: 13px;
   color: rgba(240, 236, 230, 0.36);
   text-align: end;
-  margin: 5px 12px 5px 0;
+  margin: 3px 12px 0px 0;
+  padding: 0;
 }
 
-#adviceICO_MB {
+.adviceICO_in {
   margin: 5px 3px 2px 3px;
   width: 30px;
   height: 30px;
@@ -714,6 +808,10 @@ svg:has(.team_yilan:hover) #guishan_beam_mid1 {
   font-size: 17px;
   color: #F0ECE6;
   margin: 0 0 2px 0;
+}
+
+.warnQuote {
+  font-family: sans-serif;
 }
 
 .previewCard_out {
@@ -733,24 +831,35 @@ svg:has(.team_yilan:hover) #guishan_beam_mid1 {
 
 .previeWord {
   color: #E0D8EC;
-  font-size: 13px;
+  font-size: 15px;
 }
 .previeWord#PCcounty {
-  font-size: 16px;
+  font-size: 17px;
+  padding-bottom: 3px;
 }
 .previeWord.PCconnect {
-  font-size: 6px;
+  font-size: 10px;
 }
 
 .pcG {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 3px;
-  margin: 2px 6px 2px 8px;
+  margin: 0px 6px 0px 8px;
 }
 
-#PCweatherICO_MB {
+.PCweatherICO_in {
   width: 24px;
   height: 24px;
+}
+
+#PCcounty {
+  margin-left: 5px;
+}
+
+.dataResourse {
+  font-size: 13px;
+  color: rgba(240, 236, 230, 0.4);
+  text-align: center;
+  margin: 8px 0 0 3px;
 }/*# sourceMappingURL=style.css.map */

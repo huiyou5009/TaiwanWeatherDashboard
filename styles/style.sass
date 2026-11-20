@@ -52,6 +52,8 @@ body
 .offshoreIslands
     fill: $map_block
     stroke: $map_block
+    .map_countyArea.isWarning.isActiveOSI &
+        stroke: var(--warn-color)
 
 .independent_out
     fill: #181826
@@ -134,8 +136,12 @@ body
             transform-origin: center
             transform-box: fill-box
             filter: url(#osiGlow)
-            // filter: drop-shadow(0px 0px 6px rgba($map_hover,1))
             vector-effect: non-scaling-stroke
+
+.satellitesG.isActive,.independentG.isActiveOSI
+    .offshoreIslands
+        transform-origin: center
+        transform-box: fill-box
 
 .mainIsland:hover
     transform: translate(-5px, -5px)
@@ -146,14 +152,14 @@ body
     opacity: 0
     transition: opacity 0s ease
 
-.satellitesG:hover
+.satellitesG:hover, .satellitesG.isActive
     +zoomIN('#green_island', 1.4)
     +zoomIN('#lanyu', 1.2)
     +zoomIN('#liuqiu', 1.8)
     +zoomIN('#guishan_island', 2.4)
 
-.independentG:hover
-    +zoomIN('.PPCworduge_OSI', 1.1)
+.independentG:hover, .independentG.isActiveOSI
+    +zoomIN('.PHhuge_OSI', 1.1)
     +zoomIN('.PHnormal_OSI', 1.2)
     +zoomIN('.PHsmall_OSI', 2)
     +zoomIN('.PHtiny_OSI', 2.8)
@@ -163,6 +169,8 @@ body
     +zoomIN('.LJnormal_OSI', 1.3)
     +zoomIN('.LJsmall_OSI', 1.4)
     +zoomIN('.LJtiny_OSI', 2.6)
+
+.independentG:hover
     .independent_out
         fill: rgba($map_hover,0.1)
         stroke: $osi_border_hv
@@ -186,7 +194,7 @@ body
 +discoloration('.team_yilan', '#guishan_beam_mid1',  '#8fa1b5', 0.6 )
 
 .info_outer
-    min-width: 430px
+    min-width: 450px
     height: auto
     border-radius: 12px
     background-color: $info_base
@@ -196,7 +204,7 @@ body
     padding-bottom: 10px
 
 .info_inner
-    width: 410px
+    width: 430px
     display: flex
     flex-direction: column
 
@@ -226,45 +234,119 @@ body
 
 .headlineICO_out
     margin: 5px 5px 3px 5px
-#headlineICO_MB
+.headlineICO_in
     width: 32px
     height: 32px
 
 #info_county
     font-size: 25px
     margin: 3px 0px
-    color: #99d0e6
+    // color: #99d0e6
+    color: #cfc0f0
 
-$lowTemp: #98c4d6
-$warn_base: rgb(209, 109, 27)
-.warn_out
-    border: 2px solid $warn_base
-    background-color: rgba($warn_base, 0.26 )
-    border-radius: 6px
-    display: flex
-    flex-direction: column
-    padding: 2px 0 5px 6px
-    margin-bottom: 15px
-    // animation: pulse 1s infinite
+#updateTime
+    color: rgba($info_word , 0.4)
+    font-size: 13px
 
-.warnW
-    word-break: break-word
-    margin: 2px 0
-    font-size: 16px
-
-#warn_title
-    font-weight: 700
-    font-size: 21px
-    color: #b9d698
-    // &#warn_time, &#warn_place
-        // line-height: 95%
+.headlineW
+    width: 88%
 
 .warnICO_out
     margin: 3px 5px 2px 0px
 
-#warnICO_MB
+.warnICO_in
     width: 22px
     height: 22px
+
+.warn
+    border: 2px solid var(--warn-color)
+    background-color: rgba(255,255,255,0.03)
+    border-radius: 10px
+    padding: 2px 0 6px 7px
+    margin-bottom: 15px
+    flex-direction: column
+
+#warn_title
+    margin: 2px 0
+    font-size: 21px
+    font-weight: 700
+    color: var(--warn-color)
+
+.warnW
+    font-size: 16px
+    margin: 5px 0 0 0
+    opacity: 0.8
+    word-break: break-word
+
+@keyframes alertmMI_blink
+    0%, 100%
+        fill: var(--warn-color)
+    50%
+        fill: $map_block
+
+@keyframes alertOSI_blink
+    0%, 100%
+        fill: var(--warn-color)
+        stroke: var(--warn-color)
+    50%
+        fill: $map_block
+        stroke: $map_block
+
+@keyframes alertR_blink
+    0%
+        stroke: var(--warn-color)
+        stroke-dashoffset: 0
+    50%
+        stroke: $osi_border
+    100%
+        stroke: var(--warn-color)
+        stroke-dashoffset: -32
+
+$warnAM: 3.0s ease-in-out infinite
+
+.map_countyArea.isAlert.singleG,
+.map_countyArea.isAlert.satellitesG .mainIsland
+    animation: alertmMI_blink $warnAM
+
+.map_countyArea.isAlert .offshoreIslands
+    animation: alertOSI_blink $warnAM
+
+.map_countyArea.isAlert.independentG rect
+    animation: alertR_blink $warnAM
+
+.map_countyArea.isWarning.independentG rect
+    animation: none
+    stroke: var(--warn-color)
+
+path.map_countyArea.isWarning:not(.isAlert),
+.map_countyArea.isWarning:not(.isAlert) path
+    animation: none
+    fill: var(--warn-color)
+
+$warn_alert: "#ec788c"
+@media (prefers-reduced-motion: reduce)
+    path.map_countyArea.isWarning, .map_countyArea.isWarning path
+        animation: none
+        fill: var(--warn-color)
+    path.map_countyArea.isAlert, .map_countyArea.isAlert path
+        animation: none
+        fill: $warn_alert
+
+.map_countyArea.isActive.singleG,
+.map_countyArea.isActive.satellitesG .mainIsland
+    stroke: #4772e9
+    stroke-width: 3px
+    stroke-linejoin: round
+    // filter: drop-shadow(0px 0px 3px #5bc0eb)
+
+.map_countyArea.isActiveOSI rect,
+.map_countyArea.isWarning.isActiveOSI rect
+    animation: none
+    stroke: $map_hover
+    stroke-width: 3px
+    stroke-dasharray: none
+    stroke-linejoin: round
+    filter: drop-shadow(0px 0px 6px #5bc0eb)
 
 .subtitle_out
     height: 30px
@@ -293,7 +375,7 @@ $warn_base: rgb(209, 109, 27)
 
 +layout('.advice_out', 1, -1, 1)
 
-#weatherICO_MB
+.weatherICO_in
     margin: 5px 8px 2px 5px
     width: 35px
     height: 35px
@@ -302,6 +384,7 @@ $warn_base: rgb(209, 109, 27)
     font-size: 25px
     margin: 15px 0
 
+$infoItem_bg: #5f55941e
 .outBase
     // background-color: #6d63a11e
     background-color: #5f55941e
@@ -337,7 +420,7 @@ $warn_base: rgb(209, 109, 27)
 .windLeft
     grid-column: 1/4
     grid-row: 2/-1
-    margin-left: 3px
+    margin-left: 6px
 .windRight
     grid-column: 4/-1
     grid-row: 1/-1
@@ -352,10 +435,18 @@ $warn_base: rgb(209, 109, 27)
     p
         margin: 0
 
+.windSpeed_out
+    width: auto
+    display: flex
+    flex-direction: row
+    align-items: end
+
 #windSpeedDT
     font-size: 36px
     font-weight: 300
     letter-spacing: 1px
+    margin: 0
+    padding: 0
 
 .leftRight
     display: flex
@@ -364,7 +455,7 @@ $warn_base: rgb(209, 109, 27)
 
 .windLine
     width: 1px
-    height: 66%
+    height: 70%
     transform: scaleX(0.6)
     transform-origin: left
     background: rgba($map_word_hv, 0.3)
@@ -372,14 +463,17 @@ $warn_base: rgb(209, 109, 27)
 .wind_opacity
     opacity: 0.6
 
-.LRword
-    font-size: 17px
+.LRword1
+    font-size: 20px
 
 .LRword2
-    font-size: 15px
+    font-size: 16px
 
-.windSpeedUNIT,.windConnect,.windGustUNIT
+.windSpeedUNIT,.windGustUNIT
     font-size: 12px
+.windConnect
+    font-size: 8px
+    margin: 0
 
 $compasize: 70px
 .windRight
@@ -408,9 +502,6 @@ $compasize: 70px
     font-size: 16px
     white-space: nowrap
 
-.pointerICO
-    transform: translate(-50%, -50%) rotate(225deg)
-
 .suntime_out
     position: relative
 
@@ -428,9 +519,6 @@ $compasize: 70px
     align-content: center
     flex-wrap: wrap
     flex: 1
-
-// $sunrise_rep: #f56d2e
-// $sunset_rep: #454DEE
 
 $sunrise_rep: #f5bd23
 $sunset_rep: #657eeb
@@ -464,7 +552,7 @@ $sunset_rep: #657eeb
 .bothends
     display: flex
     justify-content: space-between
-    &.trend_top
+    &.trend_top, &.headlineW
         align-items: center
 
 .sunrise_out
@@ -480,9 +568,12 @@ $sunset_rep: #657eeb
     justify-self: end
     gap: 1px
 
+.trend_out
+    padding-bottom: 0
 .trend_top
     height: 36px
     margin-top: 10px
+    margin-bottom: 0
     margin-right: 15px
 
 .toggleTR
@@ -518,54 +609,32 @@ $sunset_rep: #657eeb
             cursor: not-allowed
 
 .chart_out
-    height: 180px
+    height: 185px
+    width: 98%
+    position: relative
 
-.chart_in
-    height: auto
-    text
-        font-family: "Inter","Chiron GoRound TC", sans-serif
-        &.datalabelS
-            font-size: 12px
-        &.scaleX,&.scaleY
-            font-size: 10px
-
-$chart_base: #7784a3
-.gridlines
-    stroke: $chart_base
-.scaleX, .scaleY
-    fill: $chart_base
-
-$temp_line: #98cacc
-$temp_line: #a8d3b9
-$rain_line: #deafe4
-
-.temp_trendline
-    stroke: $temp_line
-.temp_datapoint
-    fill: $temp_line
-.temp_datalabel
-    fill: $temp_line
-
-// .rain_trendline
-//     stroke: $rain_line
-// .rain_datapoint
-//     fill: $rain_line
-// .rain_datalabel
-//     fill: $rain_line
-
-.clickRemind
+#clickRemind
     font-size: 15px
     color: rgb($info_word,0.6)
-    text-align: center
-    padding-top: 70px
+    background-color: #2A263B
+    margin: 0
+    position: absolute
+    inset: 0
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 102%
+    height: 100%
+    border: none
 
-.updateRemind
+#updateRemind
     font-size: 13px
     color: rgb($info_word,0.36)
     text-align: end
-    margin: 5px 12px 5px 0
+    margin: 3px 12px 0px 0
+    padding: 0
 
-#adviceICO_MB
+.adviceICO_in
     margin: 5px 3px 2px 3px
     width: 30px
     height: 30px
@@ -575,8 +644,8 @@ $rain_line: #deafe4
     color: $info_word
     margin: 0 0 2px 0
 
-$PCbase: #2A2438
-$PCword: #E0D8EC
+.warnQuote
+    font-family: sans-serif
 
 $PCbase: #352950
 $PCword: #E0D8EC
@@ -589,7 +658,6 @@ $PCword: #E0D8EC
     border: 1px solid rgba($PCword , 0.3)
     box-shadow: 0 6px 12px rgba(0,0,0,0.5)
     position: fixed
-    // display: flex
     display: none
     flex-direction: column
     justify-content: center
@@ -598,19 +666,28 @@ $PCword: #E0D8EC
 
 .previeWord
     color: $PCword
-    font-size: 13px
+    font-size: 15px
     &#PCcounty
-        font-size: 16px
+        font-size: 17px
+        padding-bottom: 3px
     &.PCconnect
-        font-size: 6px
+        font-size: 10px
 
 .pcG
     display: flex
     flex-direction: row
     align-items: center
-    gap: 3px
-    margin: 2px 6px 2px 8px
+    margin: 0px 6px 0px 8px
 
-#PCweatherICO_MB
+.PCweatherICO_in
     width: 24px
     height: 24px
+
+#PCcounty
+    margin-left: 5px
+
+.dataResourse
+    font-size: 13px
+    color: rgb($info_word,0.4)
+    text-align: center
+    margin: 8px 0 0 3px
